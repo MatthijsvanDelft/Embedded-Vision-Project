@@ -1,5 +1,8 @@
 #include "handler.h"
+#include "logger.h"
 #include <QApplication>
+
+INITIALIZE_EASYLOGGINGPP
 
 /*! \mainpage EngiRacing
  * This project is part of a bigger project called EngiRacing made for the HAN University of Applied Science.

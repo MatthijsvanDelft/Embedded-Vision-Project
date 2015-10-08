@@ -25,7 +25,9 @@ Handler::Handler()
  */
 void Handler::startSampling()
 {
+    ///Logs start of process in window and log file
     mainwindow.setDisplayText("Start sampling process");
+    Logger::log()->info("Start sampling process");
 
     ///Starts elapsedTimer
     startTime(elapsedTime);
@@ -46,13 +48,8 @@ void Handler::runSampling()
     cv::Mat *srcImage = grabber.getImage();//grabber.getImage();
     cv::Mat *tmpImage = NULL;
 
-    ///Check if rawImage is empty
-    if(srcImage->empty()){
-        mainwindow.setDisplayText("Image is empty");
-    }
-
     ///Calculate threshold
-    tmpImage = dip.calcThreshold(srcImage, 150, 255);
+    //tmpImage = dip.calcThreshold(srcImage, 150, 255);
 
     ///Display rawImage
     cv::imshow("Video stream", *srcImage);
@@ -67,7 +64,9 @@ void Handler::runSampling()
  */
 void Handler::stopSampling()
 {
-    mainwindow.setDisplayText("Stop sampling process.");
+    ///Logs end of process in window and log file
+    mainwindow.setDisplayText("Stop sampling process");
+    Logger::log()->info("Stop sampling process");
 
     ///Stop timer
     timer.stop();
@@ -93,7 +92,7 @@ void Handler::restartTime(QTime &time)
 }
 
 /** checkTime()
- * Checks how much time has elapsed and return this in QString
+ * @return elpased time in sting
  */
 QString Handler::checkTime(const QTime &time)
 {

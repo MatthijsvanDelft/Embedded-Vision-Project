@@ -18,13 +18,12 @@ SOURCES += main.cpp\
     dip.cpp \
     grabber.cpp \
     handler.cpp \
-    logger.cpp \
 
 HEADERS  += mainwindow.h \
     dip.h \
     grabber.h \
     handler.h \
-    logger.h \
+    logger.h
 
 
 FORMS    += mainwindow.ui

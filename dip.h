@@ -11,12 +11,16 @@
 class DIP
 {
 private:
+    void makeGrayscale(cv::Mat *srcImage);
+    void calcThreshold(cv::Mat *srcImage, int threshold, int maxValue);
     void calcBlobs();
+
+    cv::Mat enhcImage;
 
 
 public:
     DIP();
-    cv::Mat *calcThreshold(cv::Mat *srcImage, int threshold, int maxValue);
+    cv::Mat *getEnhancedImage();
 
 protected:
 

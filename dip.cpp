@@ -9,20 +9,22 @@ DIP::DIP()
 
 }
 
-/** calcBinaryImage()
+/** makeGrayscale()
  * Creates binary image fom normal images.
  */
-cv::Mat *DIP::calcThreshold(cv::Mat *srcImage, int threshold, int maxValue)
+void DIP::makeGrayscale(cv::Mat *srcImage)
 {
-    cv::Mat *tmpImage;
-
     ///Convert the image to grayscale image
-    cvtColor(*srcImage, *tmpImage, CV_RGB2GRAY);
+    cvtColor(*srcImage, enhcImage, CV_RGB2GRAY);
+}
 
+/** calcThreshold()
+ * Creates binary image fom normal images.
+ */
+void DIP::calcThreshold(cv::Mat *srcImage, int threshold, int maxValue)
+{
     ///Calculate threshold image
-    cv::threshold(*tmpImage, *tmpImage, threshold, maxValue, cv::THRESH_BINARY);
-
-    return tmpImage;
+    cv::threshold(*srcImage, enhcImage, threshold, maxValue, cv::THRESH_BINARY);
 }
 
 /** calcBlobs()
@@ -31,4 +33,14 @@ cv::Mat *DIP::calcThreshold(cv::Mat *srcImage, int threshold, int maxValue)
 void DIP::calcBlobs()
 {
 
+}
+
+/** getEnhancedImage()
+ * @return Returns enhanced image.
+ */
+cv::Mat *DIP::getEnhancedImage()
+{
+    
+    
+    return &enhcImage;
 }

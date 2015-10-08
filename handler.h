@@ -28,7 +28,6 @@ private:
 
     DIP dip;
     Grabber grabber;
-    Logger logger;
     MainWindow mainwindow;
     QTime elapsedTime;
     QTimer timer;

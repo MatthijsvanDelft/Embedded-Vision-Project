@@ -5,6 +5,7 @@
 #include "opencv/highgui.h"
 #include "opencv2/opencv.hpp"
 
+#include "logger.h"
 
 //!  Grabber class.
 /*!
