@@ -1,7 +1,7 @@
 #include "grabber.h"
 
 /** Grabber()
- * Constructor of Grabber.
+ *  \brief Constructor of Grabber.
  */
 Grabber::Grabber() : cap(0)
 {
@@ -15,7 +15,7 @@ Grabber::Grabber() : cap(0)
 }
 
 /** readImage()
- * readImage() reads the image and seprates the file and different information into objects.
+ *  \brief readImage() reads the image and seprates the file and different information into objects.
  */
 void Grabber::readImage()
 {
@@ -29,7 +29,7 @@ void Grabber::readImage()
 }
 
 /** getImage()
- * getImage() returns a pointer to the image file.
+ *  \return getImage() returns a pointer to the image file.
  */
 cv::Mat *Grabber::getImage()
 {

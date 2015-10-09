@@ -14,9 +14,8 @@
 #include "opencv/highgui.h"
 #include "opencv2/opencv.hpp"
 
-//!  Handler class.
-/*!
-  Handler connects classes en handles process.
+/*! \class Handler class
+    \brief Handler connects classes en handles process.
 */
 class Handler : public QObject
 {
@@ -38,6 +37,7 @@ public:
 protected:
 
 private slots:
+    void readTrack();
     void startSampling();
     void runSampling();
     void stopSampling();

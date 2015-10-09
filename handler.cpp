@@ -3,16 +3,17 @@
 using namespace std;
 
 /** Handler()
- * Constructor of Handler and starts main window.
+ *  \brief Constructor of Handler and starts main window.
  */
 Handler::Handler()
 {
     ///Setting for main window and opening of the main window
     mainwindow.setWindowTitle("EngiRacing");
-    mainwindow.setFixedSize(300,350);
+    mainwindow.setFixedSize(300,400);
     mainwindow.show();
 
     ///Connect the functionalty of a pushbutton to a member function from this class
+    connect(mainwindow.pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(readTrack()));
     connect(mainwindow.pbStartSampling, SIGNAL(clicked(bool)), this, SLOT(startSampling()));
     connect(mainwindow.pbStopSampling, SIGNAL(clicked(bool)), this, SLOT(stopSampling()));
 
@@ -21,7 +22,17 @@ Handler::Handler()
 }
 
 /** startSampeling()
- * Starts the process of taking frames and procesing.
+ *  \brief Starts the process of taking frames and procesing.
+ */
+void Handler::readTrack()
+{
+    ///Logs start of determening the tack
+    mainwindow.setDisplayText("Start sampling process");
+    Logger::log()->info("Start sampling process");
+}
+
+/** startSampeling()
+ *  \brief Starts the process of taking frames and procesing.
  */
 void Handler::startSampling()
 {
@@ -37,7 +48,7 @@ void Handler::startSampling()
 }
 
 /** runSampling()
- * While loop sampling
+ *  \brief While loop sampling
  */
 void Handler::runSampling()
 {
@@ -60,7 +71,7 @@ void Handler::runSampling()
 }
 
 /** stopSampeling()
- * Stop the process of taking frames and procesing.
+ *  \brief Stop the process of taking frames and procesing.
  */
 void Handler::stopSampling()
 {
@@ -76,7 +87,7 @@ void Handler::stopSampling()
 }
 
 /** startTime()
- * Starts timer.
+ *  \brief Starts timer.
  */
 void Handler::startTime(QTime &time)
 {
@@ -84,7 +95,7 @@ void Handler::startTime(QTime &time)
 }
 
 /** restartTime()
- * Restarts timer.
+ * \brief Restarts timer.
  */
 void Handler::restartTime(QTime &time)
 {
@@ -92,7 +103,7 @@ void Handler::restartTime(QTime &time)
 }
 
 /** checkTime()
- * @return elpased time in sting
+ *  \return elpased time in sting
  */
 QString Handler::checkTime(const QTime &time)
 {

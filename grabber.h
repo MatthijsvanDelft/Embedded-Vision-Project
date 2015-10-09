@@ -7,9 +7,8 @@
 
 #include "logger.h"
 
-//!  Grabber class.
-/*!
-  Grabber grabs an image and different information of that image and returns it.
+/*! \class Grabber class
+    \brief Grabber grabs an image and different information of that image and returns it.
 */
 class Grabber
 {

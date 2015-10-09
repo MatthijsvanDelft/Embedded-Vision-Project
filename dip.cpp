@@ -1,16 +1,15 @@
 #include "dip.h"
 
 /** DIP()
- * Constructor of DIP
+ *  \brief Constructor of DIP
  */
-
 DIP::DIP()
 {
 
 }
 
 /** makeGrayscale()
- * Creates binary image fom normal images.
+ *  \brief Creates binary image fom normal images.
  */
 void DIP::makeGrayscale(cv::Mat *srcImage)
 {
@@ -19,7 +18,7 @@ void DIP::makeGrayscale(cv::Mat *srcImage)
 }
 
 /** calcThreshold()
- * Creates binary image fom normal images.
+ *  \brief Creates binary image fom normal images.
  */
 void DIP::calcThreshold(cv::Mat *srcImage, int threshold, int maxValue)
 {
@@ -28,7 +27,7 @@ void DIP::calcThreshold(cv::Mat *srcImage, int threshold, int maxValue)
 }
 
 /** calcBlobs()
- * Calculate blobs and put them into a vector.
+ *  \brief Calculate blobs and put them into a vector.
  */
 void DIP::calcBlobs()
 {
@@ -36,11 +35,9 @@ void DIP::calcBlobs()
 }
 
 /** getEnhancedImage()
- * @return Returns enhanced image.
+ *  \return Returns enhanced image.
  */
 cv::Mat *DIP::getEnhancedImage()
 {
-    
-    
     return &enhcImage;
 }

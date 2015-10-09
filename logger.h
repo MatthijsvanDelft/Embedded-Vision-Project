@@ -12,11 +12,10 @@
 #include <iostream>
 #include "easylogging++.h"
 
-/**
- * Loggerclass which wraps easylogging++ framework into a singleton.
- * Please make sure you define 'INITIALIZE_EASYLOGGINGPP' above your main,
- * right below the includes. This ensures the framework is initialized only once.
- */
+/*! \class Logger class.
+ * \brief Loggerclass which wraps easylogging++ framework into a singleton.
+ * \def Please make sure you define 'INITIALIZE_EASYLOGGINGPP' above your main, right below the includes. This ensures the framework is initialized only once.
+*/
 class Logger {
  private:
     Logger() {

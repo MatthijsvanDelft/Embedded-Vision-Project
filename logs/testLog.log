@@ -1,2 +1,15 @@
 2015-10-08 10:20:47,775 INFO  Test:
 2015-10-08 10:33:46,750 INFO  Test: 155
+2015-10-08 13:08:24,291 INFO  Start sampling process
+2015-10-08 13:08:32,692 INFO  Stop sampling process
+2015-10-08 13:08:57,650 ERROR Video capture is closed
+2015-10-08 13:08:58,567 INFO  Start sampling process
+2015-10-08 13:08:58,614 ERROR Image is empty
+2015-10-08 13:09:23,223 INFO  Stop sampling process
+2015-10-09 12:21:37,339 INFO  Start sampling process
+2015-10-09 12:21:50,671 INFO  Stop sampling process
+2015-10-09 12:39:39,897 INFO  Start sampling process
+2015-10-09 12:39:42,664 INFO  Stop sampling process
+2015-10-09 12:58:26,350 INFO  Start sampling process
+2015-10-09 12:58:28,802 INFO  Start sampling process
+2015-10-09 12:58:31,424 INFO  Stop sampling process
