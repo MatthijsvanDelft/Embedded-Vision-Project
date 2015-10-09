@@ -38,7 +38,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
  */
 MainWindow::~MainWindow()
 {
-
+    /// Deletes allocated memory
+    delete pbReadTrack;
+    delete pbStartSampling;
+    delete pbStopSampling;
 }
 
 /** on_pbStartSampling_clicked()
@@ -47,8 +50,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_pbReadTrack_clicked()
 {
     pbStartSampling->setEnabled(true);
-    pbStopSampling->setEnabled(true);
-    pbReadTrack->setEnabled(false);
+    pbStopSampling->setEnabled(false);
+    pbReadTrack->setEnabled(true);
     //logDebug("Determine track button pressed");
 }
 

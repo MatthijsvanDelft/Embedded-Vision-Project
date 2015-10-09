@@ -7,28 +7,37 @@ using namespace std;
  */
 Handler::Handler()
 {
-    ///Setting for main window and opening of the main window
+    /// Setting for main window and opening of the main window.
     mainwindow.setWindowTitle("EngiRacing");
     mainwindow.setFixedSize(300,400);
     mainwindow.show();
 
-    ///Connect the functionalty of a pushbutton to a member function from this class
-    connect(mainwindow.pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(readTrack()));
+    /// Connect the functionalty of a pushbutton to a member function from this class.
+    connect(mainwindow.pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(determineTrackMask()));
     connect(mainwindow.pbStartSampling, SIGNAL(clicked(bool)), this, SLOT(startSampling()));
     connect(mainwindow.pbStopSampling, SIGNAL(clicked(bool)), this, SLOT(stopSampling()));
 
-    ///When timer reaches 33ms call function runSampling()
+    /// When timer reaches 33ms call function runSampling()
     connect(&timer, SIGNAL(timeout()), this, SLOT(runSampling()));
 }
 
-/** startSampeling()
- *  \brief Starts the process of taking frames and procesing.
+/** determineTrackMask()
+ *  \brief Determines the mask for the racetrack.
  */
-void Handler::readTrack()
+void Handler::determineTrackMask()
 {
-    ///Logs start of determening the tack
-    mainwindow.setDisplayText("Start sampling process");
-    Logger::log()->info("Start sampling process");
+    /// Logs start of determening the tack.
+    mainwindow.setDisplayText("Determine track process");
+    Logger::log()->info("Determine track process");
+
+    /// Get pointer of track image and gives it to class DIP.
+    dip.setTrackImage(grabber.getTrackImage());
+
+    /// Returns the racetrack mask.
+    cv::Mat *trackMask = dip.getTrackMask();
+
+    ///Display racetrack mask.
+    cv::imshow("Track mask", *trackMask);
 }
 
 /** startSampeling()
@@ -36,37 +45,36 @@ void Handler::readTrack()
  */
 void Handler::startSampling()
 {
-    ///Logs start of process in window and log file
+    ///Logs start of process in window and log file.
     mainwindow.setDisplayText("Start sampling process");
     Logger::log()->info("Start sampling process");
 
-    ///Starts elapsedTimer
+    ///Starts elapsedTimer.
     startTime(elapsedTime);
 
-    ///Starts 33ms timer
+    ///Starts 33ms timer.
     timer.start(33);
 }
 
 /** runSampling()
- *  \brief While loop sampling
+ *  \brief While loop sampling.
  */
 void Handler::runSampling()
 {
     ///Restart elapsedTimer
     restartTime(elapsedTime);
 
-    ///Read image in IplImage pointer image and time this
-    cv::Mat *srcImage = grabber.getImage();//grabber.getImage();
-    cv::Mat *tmpImage = NULL;
+    /// Get pointer of image and gives it to class DIP.
+    dip.setImage(grabber.getImage());
 
-    ///Calculate threshold
-    //tmpImage = dip.calcThreshold(srcImage, 150, 255);
+    ///
+    cv::Mat *enhcImage = dip.getEnhancedImage();
 
-    ///Display rawImage
-    cv::imshow("Video stream", *srcImage);
+    ///Display rawImage.
+    cv::imshow("Video stream", *enhcImage);
     cv::moveWindow("Video stream", 0, 0);
 
-    ///Display elapsedTime
+    ///Display elapsedTime.
     mainwindow.setDisplayText(checkTime(elapsedTime));
 }
 
@@ -75,14 +83,14 @@ void Handler::runSampling()
  */
 void Handler::stopSampling()
 {
-    ///Logs end of process in window and log file
+    ///Logs end of process in window and log file.
     mainwindow.setDisplayText("Stop sampling process");
     Logger::log()->info("Stop sampling process");
 
-    ///Stop timer
+    ///Stop timer.
     timer.stop();
 
-    ///Closes all opencv windows
+    ///Closes all opencv windows.
     cv::destroyAllWindows();
 }
 

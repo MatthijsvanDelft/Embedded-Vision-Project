@@ -10,15 +10,21 @@
 class DIP
 {
 private:
-    void makeGrayscale(cv::Mat *srcImage);
-    void calcThreshold(cv::Mat *srcImage, int threshold, int maxValue);
+    void calcImageMask();
+    void calcTrackMask();
     void calcBlobs();
 
-    cv::Mat enhcImage;
-
+    cv::Mat *trackImage;
+    cv::Mat *enhcTrackImage;
+    cv::Mat *image;
+    cv::Mat *enhcImage;
 
 public:
     DIP();
+    ~DIP();
+    void setImage(cv::Mat *img);
+    void setTrackImage(cv::Mat *img);
+    cv::Mat *getTrackMask();
     cv::Mat *getEnhancedImage();
 
 protected:

@@ -15,17 +15,27 @@ Grabber::Grabber() : cap(0)
 }
 
 /** readImage()
- *  \brief readImage() reads the image and seprates the file and different information into objects.
+ *  \brief readImage() reads the image.
+ *  \param *image or adres to a cv::Mat object where the image has to be stored.
  */
-void Grabber::readImage()
+void Grabber::readImage(cv::Mat *image)
 {
     ///Get a new raw image from camera
-    cap >> rawImage;
+    cap >> *image;
 
-    ///Check if rawImage is empty
-    if(rawImage.empty()){
+    ///Check if image is empty
+    if(image->empty()){
         Logger::log()->error("Image is empty");
     }
+}
+
+/** getTrackImage()
+ *  \return getTrackImage() returns a pointer to the image file.
+ */
+cv::Mat *Grabber::getTrackImage()
+{
+    readImage(&trackImage);
+    return &trackImage;
 }
 
 /** getImage()
@@ -33,6 +43,6 @@ void Grabber::readImage()
  */
 cv::Mat *Grabber::getImage()
 {
-    readImage();
-    return &rawImage;
+    readImage(&image);
+    return &image;
 }

@@ -13,14 +13,16 @@
 class Grabber
 {
 private:
-    void readImage();
+    void readImage(cv::Mat *image);
 
     cv::VideoCapture cap;
-    cv::Mat rawImage;
+    cv::Mat trackImage;
+    cv::Mat image;
 
 public:
     Grabber();
 
+    cv::Mat *getTrackImage();
     cv::Mat *getImage();
 
 protected:

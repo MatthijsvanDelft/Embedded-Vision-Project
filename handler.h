@@ -37,7 +37,7 @@ public:
 protected:
 
 private slots:
-    void readTrack();
+    void determineTrackMask();
     void startSampling();
     void runSampling();
     void stopSampling();
