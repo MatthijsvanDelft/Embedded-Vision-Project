@@ -1,5 +1,7 @@
 #include "handler.h"
 
+#define SAMPLING_TIMER 33
+
 using namespace std;
 
 /** Handler()
@@ -9,7 +11,7 @@ Handler::Handler()
 {
     /// Setting for main window and opening of the main window.
     mainwindow.setWindowTitle("EngiRacing");
-    mainwindow.setFixedSize(300,400);
+    mainwindow.setFixedSize(350,400);
     mainwindow.show();
 
     /// Connect the functionalty of a pushbutton to a member function from this class.
@@ -17,7 +19,7 @@ Handler::Handler()
     connect(mainwindow.pbStartSampling, SIGNAL(clicked(bool)), this, SLOT(startSampling()));
     connect(mainwindow.pbStopSampling, SIGNAL(clicked(bool)), this, SLOT(stopSampling()));
 
-    /// When timer reaches 33ms call function runSampling()
+    /// When timer reaches SAMPLING_TIMER call function runSampling()
     connect(&timer, SIGNAL(timeout()), this, SLOT(runSampling()));
 }
 
@@ -29,6 +31,9 @@ void Handler::determineTrackMask()
     /// Logs start of determening the tack.
     mainwindow.setDisplayText("Determine track process");
     Logger::log()->info("Determine track process");
+
+    /// Sets threshold from slider value.
+    dip.setThreshold(mainwindow.thresSlider->value());
 
     /// Get pointer of track image and gives it to class DIP.
     dip.setTrackImage(grabber.getTrackImage());
@@ -52,8 +57,8 @@ void Handler::startSampling()
     ///Starts elapsedTimer.
     startTime(elapsedTime);
 
-    ///Starts 33ms timer.
-    timer.start(33);
+    ///Starts SAMPLING_TIMER timer.
+    timer.start(SAMPLING_TIMER);
 }
 
 /** runSampling()
@@ -61,8 +66,11 @@ void Handler::startSampling()
  */
 void Handler::runSampling()
 {
-    ///Restart elapsedTimer
+    /// Restart elapsedTimer
     restartTime(elapsedTime);
+
+    /// Sets threshold from slider value.
+    dip.setThreshold(mainwindow.thresSlider->value());
 
     /// Get pointer of image and gives it to class DIP.
     dip.setImage(grabber.getImage());

@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    ///Object of handler is made. Everything else is done from handler.
     Handler handler;
 
     return a.exec();

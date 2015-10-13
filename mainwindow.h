@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include <QPushButton>
+#include <QSlider>
+#include <QLabel>
 
 /*! \class MainWindow class
    \brief MainWindow creates the GUI
@@ -27,6 +29,8 @@ public:
     QPushButton *pbReadTrack;
     QPushButton *pbStartSampling;
     QPushButton *pbStopSampling;
+    QSlider *thresSlider;
+    QLabel *thresLabel;
 
     void setDisplayText(const QString s);
 
@@ -34,6 +38,7 @@ private slots:
     void on_pbReadTrack_clicked();
     void on_pbStartSampling_clicked();
     void on_pbStopSampling_clicked();
+    void on_thresSlider_released();
 };
 
 #endif // MAINWINDOW_H

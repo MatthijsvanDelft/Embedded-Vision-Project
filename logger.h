@@ -19,7 +19,7 @@
 class Logger {
  private:
     Logger() {
-        el::Configurations conf("C:/Users/Matthijs/Desktop/Embedded-Vision-Project/logging.conf");
+        el::Configurations conf("C:/Users/Matthijs/Documents/HAN/ESE4/Minor/Embedded-Vision-Project-QT/logging.conf");
         el::Loggers::reconfigureAllLoggers(conf);
     }
 

@@ -8,28 +8,36 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     /// Creates listwidget to print information. Left upper point on coordinates (25,25), size 250x250.
     listWidget = new QListWidget(this);
-    listWidget->setGeometry(QRect(QPoint(25, 25),QSize(250, 250)));
-
+    listWidget->setGeometry(QRect(QPoint(25, 25), QSize(250, 250)));
 
     /// Creates pushbutton on coordiantes (25,300), size 100x25.
     pbReadTrack = new QPushButton("Determine track", this);
-    pbReadTrack->setGeometry(QRect(QPoint(25, 300),QSize(100, 25)));
+    pbReadTrack->setGeometry(QRect(QPoint(25, 300), QSize(100, 25)));
     pbReadTrack->setEnabled(true);
 
     pbStartSampling = new QPushButton("Start sampling", this);
-    pbStartSampling->setGeometry(QRect(QPoint(25, 350),QSize(100, 25)));
+    pbStartSampling->setGeometry(QRect(QPoint(25, 350), QSize(100, 25)));
     pbStartSampling->setEnabled(false);
 
     pbStopSampling = new QPushButton("Stop sampling", this);
-    pbStopSampling->setGeometry(QRect(QPoint(175, 350),QSize(100, 25)));
+    pbStopSampling->setGeometry(QRect(QPoint(175, 350), QSize(100, 25)));
     pbStopSampling->setEnabled(false);
 
-    /** Connect signal and slot
-     *  \brief Connect the functionalty of a pushbutton to a member function from this class.
-     */
+    /// Creates threshold slider and label
+    thresSlider = new QSlider(this);
+    thresSlider->setGeometry(QRect(QPoint(300, 25), QSize(25, 250)));
+    thresSlider->setMinimum(0);
+    thresSlider->setMaximum(255);
+
+    thresLabel = new QLabel(this);
+    thresLabel->setText("Threshold");
+    thresLabel->setGeometry(QRect(QPoint(275, 0), QSize(75, 25)));
+
+    /// Connect the functionalty of a object to a member function from this class.
     connect(pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(on_pbReadTrack_clicked()));
     connect(pbStartSampling, SIGNAL(clicked(bool)), this, SLOT(on_pbStartSampling_clicked()));
     connect(pbStopSampling, SIGNAL(clicked(bool)), this, SLOT(on_pbStopSampling_clicked()));
+    connect(thresSlider, SIGNAL(valueChanged(int)), this, SLOT(on_thresSlider_released()));
 }
 
 
@@ -75,6 +83,17 @@ void MainWindow::on_pbStopSampling_clicked()
     pbStartSampling->setEnabled(true);
     pbStopSampling->setEnabled(false);
     //logDebug("Stop sampling button pressed");
+}
+
+/** on_thresSlider_released()
+ *  \brief This function is called when threshold slider is released.
+ */
+void MainWindow::on_thresSlider_released()
+{
+    QString s;
+    s.push_back("Threshold value: ");
+    s.push_back(QString::number(thresSlider->value()));
+    setDisplayText(s);
 }
 
 /** logDebug(const QString s)

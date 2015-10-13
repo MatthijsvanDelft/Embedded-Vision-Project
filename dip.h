@@ -13,19 +13,26 @@ private:
     void calcImageMask();
     void calcTrackMask();
     void calcBlobs();
+    void drawContour();
 
     cv::Mat *trackImage;
     cv::Mat *enhcTrackImage;
     cv::Mat *image;
     cv::Mat *enhcImage;
 
+    unsigned int threshold;
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<cv::Vec4i> hierarchy;
+
 public:
     DIP();
     ~DIP();
+    void setThreshold(unsigned int thres);
     void setImage(cv::Mat *img);
     void setTrackImage(cv::Mat *img);
     cv::Mat *getTrackMask();
     cv::Mat *getEnhancedImage();
+    //cv::Mat *getContour();
 
 protected:
 
