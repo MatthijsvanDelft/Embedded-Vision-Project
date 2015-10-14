@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     thresSlider->setGeometry(QRect(QPoint(300, 25), QSize(25, 250)));
     thresSlider->setMinimum(0);
     thresSlider->setMaximum(255);
+    thresSlider->setValue(230);
 
     thresLabel = new QLabel(this);
     thresLabel->setText("Threshold");

@@ -4,8 +4,10 @@
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
 #include "opencv2/opencv.hpp"
-
 #include "logger.h"
+
+#define WIDTH 640
+#define HEIGHT 480
 
 /*! \class Grabber class
     \brief Grabber grabs an image and different information of that image and returns it.

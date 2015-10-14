@@ -32,6 +32,7 @@ public:
     cv::Mat *getTrackMask();
     cv::Mat *getEnhancedImage();
     std::vector<std::vector<cv::Point>> *getContour();
+    std::vector<cv::Vec4i> *getHierarchy();
 
 protected:
 

@@ -10,8 +10,8 @@ Grabber::Grabber() : cap(0)
     }
 
     ///Set format of stream
-    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
-    cap.set(CV_CAP_PROP_FRAME_WIDTH, 640);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT, HEIGHT);
+    cap.set(CV_CAP_PROP_FRAME_WIDTH, WIDTH);
 }
 
 /** readImage()

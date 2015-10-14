@@ -115,11 +115,19 @@ cv::Mat *DIP::getEnhancedImage()
 }
 
 /** getContours()
- *  \return Returns pointer to enhanced image.
+ *  \return Returns pointer to vector contours.
  */
 std::vector<std::vector<cv::Point>> *DIP::getContour()
 {
     return &contours;
+}
+
+/** getHierarchy()
+ *  \return Returns pointer to vector hierarchy.
+ */
+std::vector<cv::Vec4i> *DIP::getHierarchy()
+{
+    return &hierarchy;
 }
 
 
