@@ -18,12 +18,16 @@ SOURCES += main.cpp\
     dip.cpp \
     grabber.cpp \
     handler.cpp \
+    car.cpp \
+    classifier.cpp
 
 HEADERS  += mainwindow.h \
     dip.h \
     grabber.h \
     handler.h \
-    logger.h
+    logger.h \
+    car.h \
+    classifier.h
 
 
 FORMS    += mainwindow.ui

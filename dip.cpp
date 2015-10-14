@@ -62,14 +62,6 @@ void DIP::drawContour()
         }
 }
 
-/** calcBlobs()
- *  \brief Calculate blobs and put them into a vector.
- */
-void DIP::calcBlobs()
-{
-
-}
-
 /** setThreshold
  *  @brief Sets threshold value.
  *  @param unsigned integer thres.
@@ -122,15 +114,12 @@ cv::Mat *DIP::getEnhancedImage()
     return enhcImage;
 }
 
-///** getContours()
-// *  \return Returns pointer to enhanced image.
-// */
-//cv::Mat *DIP::getContour()
-//{
-//    ///Search for countours and draw them in the image.
-//    drawContour();
-
-//    return enhcImage;
-//}
+/** getContours()
+ *  \return Returns pointer to enhanced image.
+ */
+std::vector<std::vector<cv::Point>> *DIP::getContour()
+{
+    return &contours;
+}
 
 

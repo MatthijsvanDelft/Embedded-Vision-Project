@@ -5,6 +5,7 @@
 #include <QTime>
 #include <QTimer>
 #include <sstream>
+#include "classifier.h"
 #include "dip.h"
 #include "grabber.h"
 #include "logger.h"
@@ -25,6 +26,7 @@ private:
     void restartTime(QTime &time);
     QString checkTime(const QTime &time);
 
+    Classifier classifier;
     DIP dip;
     Grabber grabber;
     MainWindow mainwindow;

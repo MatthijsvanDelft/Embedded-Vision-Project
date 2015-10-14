@@ -78,6 +78,9 @@ void Handler::runSampling()
     ///
     cv::Mat *enhcImage = dip.getEnhancedImage();
 
+    /// Get pointer of contour vector and gives it to class classifier.
+    classifier.setContours(dip.getContour());
+
     ///Display rawImage.
     cv::imshow("Video stream", *enhcImage);
     cv::moveWindow("Video stream", 0, 0);

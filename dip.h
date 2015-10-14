@@ -12,7 +12,6 @@ class DIP
 private:
     void calcImageMask();
     void calcTrackMask();
-    void calcBlobs();
     void drawContour();
 
     cv::Mat *trackImage;
@@ -32,7 +31,7 @@ public:
     void setTrackImage(cv::Mat *img);
     cv::Mat *getTrackMask();
     cv::Mat *getEnhancedImage();
-    //cv::Mat *getContour();
+    std::vector<std::vector<cv::Point>> *getContour();
 
 protected:
 
