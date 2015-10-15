@@ -42,7 +42,10 @@ void DIP::calcImageMask()
     cv::cvtColor(*image, *enhcImage, CV_RGB2GRAY);
 
     /// Convert grayscale image to binaire image;
-    cv::threshold(*enhcImage, *enhcImage, threshold, 255, cv::THRESH_BINARY);
+    //cv::threshold(*enhcImage, *enhcImage, threshold, 255, cv::THRESH_BINARY);
+
+    ///Adaptive Thresholding
+    cv::adaptiveThreshold(*enhcImage, *enhcImage, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 75, 25);
 }
 
 /** drawContours()
