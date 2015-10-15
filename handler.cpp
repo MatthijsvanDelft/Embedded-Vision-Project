@@ -14,6 +14,8 @@ Handler::Handler()
     mainwindow.setFixedSize(350,400);
     mainwindow.show();
 
+    //test
+
     /// Connect the functionalty of a pushbutton to a member function from this class.
     connect(mainwindow.pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(determineTrackMask()));
     connect(mainwindow.pbStartSampling, SIGNAL(clicked(bool)), this, SLOT(startSampling()));
