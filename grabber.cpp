@@ -12,6 +12,7 @@ Grabber::Grabber() : cap(0)
     ///Set format of stream
     cap.set(CV_CAP_PROP_FRAME_HEIGHT, HEIGHT);
     cap.set(CV_CAP_PROP_FRAME_WIDTH, WIDTH);
+    Logger::log()->info("Frame height & width is set");
 }
 
 /** readImage()
@@ -35,6 +36,8 @@ void Grabber::readImage(cv::Mat *image)
 cv::Mat *Grabber::getTrackImage()
 {
     readImage(&trackImage);
+
+    Logger::log()->info("Track is succesfully scanned");
     return &trackImage;
 }
 
