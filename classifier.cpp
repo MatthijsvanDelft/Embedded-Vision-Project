@@ -1,10 +1,16 @@
 #include "classifier.h"
 
+/** Classifier
+ * @brief Constructor of classifier.
+ */
 Classifier::Classifier()
 {
     carVector.push_back(Car());
 }
 
+/** classifyCars()
+ * @brief Classifies contours into different cars.
+ */
 void Classifier::classifyCars()
 {
     cv::Mat tmp = cv::Mat::zeros(image->size(), CV_8UC3);
@@ -14,7 +20,6 @@ void Classifier::classifyCars()
         double contourArea = cv::contourArea(contours->at(i));
 
         if(contourArea > 300.0 && contourArea < 400.0){/// Minus
-
             cv::drawContours(tmp , *contours, i, cv::Scalar(255,255,255), 4, 8, *hierarchy, 0, cv::Point());
             cv::threshold(tmp, tmp, 0, 254, cv::THRESH_BINARY);
 
@@ -35,21 +40,34 @@ void Classifier::classifyCars()
     }
 }
 
+/** setImage()
+ * @brief Sets image as size reference.
+ * @param pointer to cv::Mat image.
+ */
 void Classifier::setImage(cv::Mat *im)
 {
     image = im;
 }
 
+/** setContours()
+ * @param Sets 2D vector of contours produced from function drawContours from class DIP.
+ */
 void Classifier::setContours(std::vector<std::vector<cv::Point>> *cont)
 {
     contours = cont;
 }
 
+/** setHierarchy()
+ * @param Sets Vector ? produced from function drawContours from class DIP.
+ */
 void Classifier::setHierarchy(std::vector<cv::Vec4i> *hier)
 {
     hierarchy = hier;
 }
 
+/** getCars()
+ * @return Returns pointer to vector of cars.
+ */
 std::vector<Car> *Classifier::getCars(){
 
     return &carVector;

@@ -21,6 +21,7 @@ private:
     unsigned int team;
     QTime lapTime;
     unsigned int laps;
+    bool dsqStatus;
     cv::Point2f coor;
 
 public:
@@ -33,6 +34,8 @@ public:
     QString getSymbol();
     void setLaps(unsigned int lps);
     unsigned int getLaps();
+    bool getDsqStatus();
+    void setDsqStatus(bool dsq);
     void startLapTime();
     void resetLapTime();
     QString getLapTime();

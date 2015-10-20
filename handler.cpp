@@ -24,8 +24,6 @@ Handler::Handler()
 
     /// When timer reaches SAMPLING_TIMER call function runSampling()
     connect(&timer, SIGNAL(timeout()), this, SLOT(runSampling()));
-
-    toggleLap = false;
 }
 
 /** determineTrackMask()
@@ -158,9 +156,11 @@ QString Handler::checkTime(const QTime &time)
 }
 
 /** checkFinish()
- * \brief check if car is on start/finish, if so start/restart timer.
+ *  \brief check if car is on start/finish, if so start/restart timer.
  */
 void Handler::checkFinish(){
+    static bool toggleLap = false;
+    static bool onFinish;
     std::vector<Car> *tempCarVector = classifier.getCars();
 
     QString sLaptime;
@@ -169,13 +169,13 @@ void Handler::checkFinish(){
     /// Check if car is on start/finish
     if(tmp > 0){
         Logger::log()->info("Car passed Start/finish!");
+
         /// Check if timer already runs & anti dender
         if(toggleLap == false && onFinish == false){
             tempCarVector->at(0).startLapTime();
             toggleLap = true;
             onFinish = true;
         }
-
         else if(toggleLap == true && onFinish == false){
 
             sLaptime = tempCarVector->at(0).getLapTime();
@@ -190,21 +190,18 @@ void Handler::checkFinish(){
 }
 
 /** checkPosCar()
- * \brief check if car is on track, if not diskwalify car.
+ *  \brief check if car is on track, if not diskwalify car.
  */
 void Handler::checkPosCar(){
-
     std::vector<Car> *tempCarVector = classifier.getCars();
-
 
     int tmp = trackMask->at<uchar>(tempCarVector->at(0).getCoordinates());
 
     /// Check if car is in or outside the track
-    if(tmp > 0){
+    if(tmp == 0){
+        mainwindow.setDisplayText("Car is outside the track");
 
+        /// Set that car 0 is disqualified.
+        tempCarVector->at(0).setDsqStatus(true);
     }
-    else{
-
-    }
-
 }
