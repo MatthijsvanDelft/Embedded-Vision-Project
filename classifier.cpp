@@ -23,7 +23,7 @@ void Classifier::classifyCars()
 
             //cv::imshow("Car1", *carVector.at(0).getImage());
             //cv::moveWindow("Video stream", 300, 300);
-            std::cout << "Coordinates " << carVector.at(0).getCoordinates() << std::endl;
+            //std::cout << "Coordinates " << carVector.at(0).getCoordinates() << std::endl;
         }/*
         else if(contourArea > 100.0 && contourArea < 130.0){/// Plus
             carVector.push_back(Car());
@@ -48,4 +48,9 @@ void Classifier::setContours(std::vector<std::vector<cv::Point>> *cont)
 void Classifier::setHierarchy(std::vector<cv::Vec4i> *hier)
 {
     hierarchy = hier;
+}
+
+std::vector<Car> *Classifier::getCars(){
+
+    return &carVector;
 }

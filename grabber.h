@@ -18,13 +18,17 @@ private:
     void readImage(cv::Mat *image);
 
     cv::VideoCapture cap;
+    cv::VideoCapture trackCap;
+    cv::VideoCapture finishCap;
     cv::Mat trackImage;
+    cv::Mat finishImage;
     cv::Mat image;
 
 public:
     Grabber();
 
     cv::Mat *getTrackImage();
+    cv::Mat *getFinishImage();
     cv::Mat *getImage();
 
 protected:

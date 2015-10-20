@@ -32,6 +32,12 @@ private:
     MainWindow mainwindow;
     QTime elapsedTime;
     QTimer timer;
+    cv::Mat *trackMask;
+    cv::Mat *finishMask;
+    void checkPosCar();
+    void checkFinish();
+    bool toggleLap;
+    bool onFinish;
 
 public:
     Handler();
@@ -40,6 +46,7 @@ protected:
 
 private slots:
     void determineTrackMask();
+    void determineStartFinishMask();
     void startSampling();
     void runSampling();
     void stopSampling();

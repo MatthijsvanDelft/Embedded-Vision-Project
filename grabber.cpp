@@ -3,7 +3,7 @@
 /** Grabber()
  *  \brief Constructor of Grabber.
  */
-Grabber::Grabber() : cap(0)
+Grabber::Grabber() : cap(0), trackCap("/Users/Mike/Desktop/Testafbeeldingen Vision/TrackFilled.png"), finishCap("/Users/Mike/Desktop/Testafbeeldingen Vision/StartFinish.png")
 {
     if(!cap.isOpened()){
         Logger::log()->error("Video capture is closed");
@@ -35,10 +35,35 @@ void Grabber::readImage(cv::Mat *image)
  */
 cv::Mat *Grabber::getTrackImage()
 {
-    readImage(&trackImage);
+    //readImage(&trackImage);
+    trackCap >> trackImage;
+
 
     Logger::log()->info("Track is succesfully scanned");
     return &trackImage;
+}
+
+/** getFinishImage()
+ *  \return getFinishImage() returns a pointer to the image file.
+ */
+cv::Mat *Grabber::getFinishImage()
+{
+    //readImage(&trackImage);
+    finishCap >> finishImage;
+
+    if(finishImage.empty()){
+        Logger::log()->warn("Finish mask cannot be opened!");
+    }
+    else{
+    Logger::log()->info("Finish is succesfully scanned");
+
+    /// Convert image to grayscale image.
+    cv::cvtColor(finishImage, finishImage, CV_RGB2GRAY);
+
+    /// Convert grayscale image to binaire image;
+    cv::threshold(finishImage, finishImage, 230, 255, cv::THRESH_BINARY);
+    }
+    return &finishImage;
 }
 
 /** getImage()

@@ -24,6 +24,7 @@ public:
     void setImage(cv::Mat *im);
     void setContours(std::vector<std::vector<cv::Point> > *cont);
     void setHierarchy(std::vector<cv::Vec4i> *hier);
+    std::vector<Car> *getCars();
 
 protected:
 

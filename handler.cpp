@@ -18,11 +18,14 @@ Handler::Handler()
 
     /// Connect the functionalty of a pushbutton to a member function from this class.
     connect(mainwindow.pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(determineTrackMask()));
+    connect(mainwindow.pbReadTrack, SIGNAL(clicked(bool)), this, SLOT(determineStartFinishMask()));
     connect(mainwindow.pbStartSampling, SIGNAL(clicked(bool)), this, SLOT(startSampling()));
     connect(mainwindow.pbStopSampling, SIGNAL(clicked(bool)), this, SLOT(stopSampling()));
 
     /// When timer reaches SAMPLING_TIMER call function runSampling()
     connect(&timer, SIGNAL(timeout()), this, SLOT(runSampling()));
+
+    toggleLap = false;
 }
 
 /** determineTrackMask()
@@ -41,10 +44,18 @@ void Handler::determineTrackMask()
     dip.setTrackImage(grabber.getTrackImage());
 
     /// Returns the racetrack mask.
-    cv::Mat *trackMask = dip.getTrackMask();
+    trackMask = dip.getTrackMask();
 
     ///Display racetrack mask.
     cv::imshow("Track mask", *trackMask);
+}
+
+/** determineStartFinishMask()
+ * \brief Determines the mask for the start finish
+ */
+void Handler::determineStartFinishMask(){
+    ///Get pointer of start/finish image
+    finishMask = grabber.getFinishImage();
 }
 
 /** startSampeling()
@@ -88,12 +99,16 @@ void Handler::runSampling()
     ///
     classifier.classifyCars();
 
+    checkPosCar();
+
+    checkFinish();
+
     ///Display rawImage.
-    //cv::imshow("Video stream", *enhcImage);
-    //cv::moveWindow("Video stream", 0, 0);
+    cv::imshow("Video stream", *enhcImage);
+    cv::moveWindow("Video stream", 0, 0);
 
     ///Display elapsedTime.
-    mainwindow.setDisplayText(checkTime(elapsedTime));
+    //mainwindow.setDisplayText(checkTime(elapsedTime));
 }
 
 /** stopSampeling()
@@ -142,3 +157,54 @@ QString Handler::checkTime(const QTime &time)
     return s;
 }
 
+/** checkFinish()
+ * \brief check if car is on start/finish, if so start/restart timer.
+ */
+void Handler::checkFinish(){
+    std::vector<Car> *tempCarVector = classifier.getCars();
+
+    QString sLaptime;
+    int tmp = finishMask->at<uchar>(tempCarVector->at(0).getCoordinates());
+
+    /// Check if car is on start/finish
+    if(tmp > 0){
+        Logger::log()->info("Car passed Start/finish!");
+        /// Check if timer already runs & anti dender
+        if(toggleLap == false && onFinish == false){
+            tempCarVector->at(0).startLapTime();
+            toggleLap = true;
+            onFinish = true;
+        }
+
+        else if(toggleLap == true && onFinish == false){
+
+            sLaptime = tempCarVector->at(0).getLapTime();
+            tempCarVector->at(0).resetLapTime();
+            mainwindow.setDisplayText(sLaptime);
+            toggleLap = false;
+        }
+    }
+    else{
+        onFinish = false;
+    }
+}
+
+/** checkPosCar()
+ * \brief check if car is on track, if not diskwalify car.
+ */
+void Handler::checkPosCar(){
+
+    std::vector<Car> *tempCarVector = classifier.getCars();
+
+
+    int tmp = trackMask->at<uchar>(tempCarVector->at(0).getCoordinates());
+
+    /// Check if car is in or outside the track
+    if(tmp > 0){
+
+    }
+    else{
+
+    }
+
+}

@@ -70,3 +70,21 @@ cv::Mat *Car::getImage()
 {
     return &image;
 }
+
+void Car::startLapTime(){
+    lapTime.start();
+}
+
+void Car::resetLapTime(){
+    lapTime.restart();
+}
+
+QString Car::getLapTime(){
+    std::stringstream ss;
+    QString s;
+
+    ss << "Laptime: " << lapTime.elapsed() << "ms";
+    s = QString::fromStdString(ss.str());
+
+    return s;
+}

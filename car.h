@@ -33,6 +33,9 @@ public:
     QString getSymbol();
     void setLaps(unsigned int lps);
     unsigned int getLaps();
+    void startLapTime();
+    void resetLapTime();
+    QString getLapTime();
 
 protected:
 
