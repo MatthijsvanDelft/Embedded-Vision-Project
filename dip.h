@@ -3,6 +3,7 @@
 
 #include "opencv/highgui.h"
 #include "opencv2/opencv.hpp"
+#include "logger.h"
 
 /*! \class DIP class
     \brief DIP(Digital Image Processor) contains all functions for image enhancement, segmentation and feature extraction.

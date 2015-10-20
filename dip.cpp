@@ -42,10 +42,10 @@ void DIP::calcImageMask()
     cv::cvtColor(*image, *enhcImage, CV_RGB2GRAY);
 
     /// Convert grayscale image to binaire image;
-    //cv::threshold(*enhcImage, *enhcImage, threshold, 255, cv::THRESH_BINARY);
+    cv::threshold(*enhcImage, *enhcImage, threshold, 255, cv::THRESH_BINARY);
 
-    ///Adaptive Thresholding
-    cv::adaptiveThreshold(*enhcImage, *enhcImage, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 75, 25);
+    /// Adaptive Thresholding
+    //cv::adaptiveThreshold(*enhcImage, *enhcImage, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 75, 25);
 }
 
 /** drawContours()
@@ -53,13 +53,13 @@ void DIP::calcImageMask()
  */
 void DIP::drawContour()
 {
-    ///
+    /// Find Contours
     cv::findContours(*enhcImage, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
 
-    ///
+    /// Clear enhcImage
     *enhcImage = cv::Mat::zeros(enhcImage->size(), CV_8UC3);
 
-    ///
+    /// Draw all the contours in enhcImage
     for(unsigned long i = 0; i< contours.size(); i++){
             cv::drawContours(*enhcImage, contours, i, cv::Scalar(255,255,255), 2, 8, hierarchy, 0, cv::Point());
         }
@@ -100,6 +100,7 @@ cv::Mat *DIP::getTrackMask()
     /// Calculates mask for racetrack image.
     calcTrackMask();
 
+    Logger::log()->info("TrackMask is succesfully created");
     return enhcTrackImage;
 }
 

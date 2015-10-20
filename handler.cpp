@@ -89,8 +89,8 @@ void Handler::runSampling()
     classifier.classifyCars();
 
     ///Display rawImage.
-    cv::imshow("Video stream", *enhcImage);
-    cv::moveWindow("Video stream", 0, 0);
+    //cv::imshow("Video stream", *enhcImage);
+    //cv::moveWindow("Video stream", 0, 0);
 
     ///Display elapsedTime.
     mainwindow.setDisplayText(checkTime(elapsedTime));

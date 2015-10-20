@@ -7,19 +7,31 @@ Car::Car()
 
 void Car::calcCoordinates()
 {
+
     /// Set up the detector with default parameters.
     cv::SimpleBlobDetector detector;
 
     /// Detect blobs.
     std::vector<cv::KeyPoint> keypoints;
     detector.detect(image, keypoints);
+/*
+    drawKeypoints( image, keypoints, image, CV_RGB(0,0,255), cv::DrawMatchesFlags::DEFAULT);
+    cv::imshow("Car", image);*/
+    /// Check if image is empty.
+    if(image.data != 0){
 
     /// Checks if keypoints is empty.
-    if(keypoints.size() > 0){
-        Logger::log()->warn("Keypoints is empty");
+    if(keypoints.empty()){
+        Logger::log()->warn("Keypoints in calcCoordinates is empty");
 
+    }
+    else{
         /// Place keypoints coordinates in coor.
         coor = keypoints.at(0).pt;
+        }
+    }
+    else{
+        Logger::log()->warn("image in calcCoordinates is empty");
     }
 }
 
