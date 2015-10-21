@@ -24,7 +24,7 @@ void Car::calcCoordinates()
 //    cv::imshow("Car", image);
 
     /// Check if image is empty.
-    if(image.empty()){
+    if(image.data != 0){
 
     /// Checks if keypoints is empty.
     if(keypoints.empty()){

@@ -36,6 +36,9 @@ private:
     cv::Mat *finishMask;
     void checkPosCar();
     void checkFinish();
+    bool toggleLap;
+    bool onFinish;
+    bool onTrack;
 
 public:
     Handler();

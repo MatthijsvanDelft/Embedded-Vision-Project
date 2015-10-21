@@ -24,6 +24,10 @@ Handler::Handler()
 
     /// When timer reaches SAMPLING_TIMER call function runSampling()
     connect(&timer, SIGNAL(timeout()), this, SLOT(runSampling()));
+
+    toggleLap = false;
+    onFinish = false;
+    onTrack = true;
 }
 
 /** determineTrackMask()
@@ -159,8 +163,7 @@ QString Handler::checkTime(const QTime &time)
  *  \brief check if car is on start/finish, if so start/restart timer.
  */
 void Handler::checkFinish(){
-    static bool toggleLap = false;
-    static bool onFinish;
+
     std::vector<Car> *tempCarVector = classifier.getCars();
 
     QString sLaptime;
@@ -172,6 +175,7 @@ void Handler::checkFinish(){
 
         /// Check if timer already runs & anti dender
         if(toggleLap == false && onFinish == false){
+            mainwindow.setDisplayText("New lap is started!");
             tempCarVector->at(0).startLapTime();
             toggleLap = true;
             onFinish = true;
@@ -199,9 +203,17 @@ void Handler::checkPosCar(){
 
     /// Check if car is in or outside the track
     if(tmp == 0){
+        if(onTrack == true){
         mainwindow.setDisplayText("Car is outside the track");
-
+        onTrack = false;
         /// Set that car 0 is disqualified.
         tempCarVector->at(0).setDsqStatus(true);
+        }
     }
+    else
+        if(onTrack == false){
+            mainwindow.setDisplayText("Car is back in track!");
+            onTrack = true;
+            }
+
 }
